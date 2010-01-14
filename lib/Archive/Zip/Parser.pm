@@ -53,6 +53,7 @@ sub parse {
         $self->{'_exception_object'}->_croak('Not a valid .ZIP archive');
     }
 
+    my @parsed_entry_struct;
     while (1) {
         my $signature_struct = 
             Struct(
@@ -102,19 +103,26 @@ sub parse {
                     String(
                         '_file_name',
                         sub {
-                            $_->ctx->{'_file_name_length'}
-                        }
+                            $_->ctx->{'_file_name_length'};
+                        },
                     ),
                     Field(
                         '_extra_field',
                         sub {
-                            $_->ctx->{'_extra_field_length'}
-                        }
+                            $_->ctx->{'_extra_field_length'};
+                        },
                     ),
                 ),
-                Field( '_file_data', sub { $_->ctx->{'_local_file_header'}->{'_compressed_size'} } ),
+                Field(
+                    '_file_data',
+                    sub {
+                        $_->ctx->{'_local_file_header'}->{'_compressed_size'};
+                    }
+                ),
                 If(
-                    sub { $_->ctx->{'_local_file_header'}->{'_gp_bit'}->{'_bit_3'} },
+                    sub {
+                        $_->ctx->{'_local_file_header'}->{'_gp_bit'}->{'_bit_3'};
+                    },
                     Struct(
                         '_data_descriptor',
                         ULInt32('_crc_32'           ),
@@ -124,11 +132,23 @@ sub parse {
                 ),
             );
 
-        my $parsed_entry_struct = $entry_struct->parse( $self->{'_bit_stream'} );
-        push @{ $self->{'_entry'} }, $parsed_entry_struct;
+        push @parsed_entry_struct, $entry_struct->parse( $self->{'_bit_stream'} );
     }
 
+    my $entry_count = 0;
     while (1) {
+        my $signature_struct = 
+            Struct(
+                '_signature_struct',
+                Peek(
+                    UBInt32('_signature')
+                ),
+            );
+        my $parsed_signature_struct
+          = $signature_struct->parse( $self->{'_bit_stream'} );
+        my $signature = pack 'N', $parsed_signature_struct->{'_signature'};
+        last if $signature ne "PK\x01\x02";
+
         my $entry_struct
             = Struct(
                 '_entry_struct',
@@ -172,23 +192,29 @@ sub parse {
                     String(
                         '_file_name',
                         sub {
-                            $_->ctx->{'_file_name_length'}
+                            $_->ctx->{'_file_name_length'};
                         },
                     ),
                     Field(
                         '_extra_field',
                         sub {
-                            $_->ctx->{'_extra_field_length'}
+                            $_->ctx->{'_extra_field_length'};
                         },
                     ),
                     Field(
-                        'File_Comment',
+                        '_file_comment',
                         sub {
-                            $_->ctx->{'File_Comment_Length'};
+                            $_->ctx->{'_file_comment_length'};
                         }
                     ),
                 ),
             );
+
+        %{ $parsed_entry_struct[$entry_count] } = (
+            %{ $parsed_entry_struct[$entry_count] },
+            %{ $entry_struct->parse( $self->{'_bit_stream'} ) }
+        );
+        $entry_count++;
     }
 
     $self->{'_is_parsed'} = 1;
