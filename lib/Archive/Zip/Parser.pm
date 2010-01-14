@@ -217,6 +217,43 @@ sub parse {
         $entry_count++;
     }
 
+    my $signature_struct = 
+        Struct(
+            '_signature_struct',
+            Peek(
+                UBInt32('_signature')
+            ),
+        );
+    my $parsed_signature_struct
+      = $signature_struct->parse( $self->{'_bit_stream'} );
+    my $signature = pack 'N', $parsed_signature_struct->{'_signature'};
+    last if $signature ne "PK\x05\x06";
+
+    my $end_of_central_directory_struct
+        = Struct(
+            '_end_of_central_directory_struct',
+            ULInt32('_signature'                ),
+            ULInt16('_disk_number'),
+            ULInt16('_start_disk_number'),
+            ULInt16('_total_disk_entries'),
+            ULInt16('_total_entries'),
+            ULInt32('_size'),
+            ULInt32('_start_offset'),
+            ULInt16('_zip_comment_length'),
+            String(
+                '_zip_comment',
+                sub {
+                    $_->ctx->{'_zip_comment_length'};
+                },
+            ),
+        );
+
+    my @parsed_end_of_central_directory_struct
+      = $end_of_central_directory_struct->parse( $self->{'_bit_stream'} );
+    push @{ $self->{'_end_of_central_directory'} },
+      @parsed_end_of_central_directory_struct;
+    push @{ $self->{'_entry'} }, @parsed_entry_struct;
+
     $self->{'_is_parsed'} = 1;
     return 1;
 }
