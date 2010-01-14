@@ -1,0 +1,26 @@
+Archive-Zip-Parser version 0.0.1
+
+INSTALLATION
+
+To install this module, run the following commands:
+
+	perl Build.PL
+	./Build
+	./Build test
+	./Build install
+
+
+DEPENDENCIES
+
+autodie           - first released with perl 5.010001
+Carp              - first released with perl 5
+Data::ParseBinary - not in CORE
+version           - first released with perl 5.009
+
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2010, Alan Haggai Alavi
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
