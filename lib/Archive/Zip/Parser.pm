@@ -5,7 +5,8 @@ use strict;
 use autodie;
 use Data::ParseBinary;
 
-use base qw( Archive::Zip::Parser::Exception );
+use Archive::Zip::Parser::Exception;
+use Archive::Zip::Parser::Entry;
 
 use version; our $VERSION = qv( '0.0.0_01' );
 
@@ -132,7 +133,8 @@ sub parse {
                 ),
             );
 
-        push @parsed_entry_struct, $entry_struct->parse( $self->{'_bit_stream'} );
+        push @parsed_entry_struct,
+          $entry_struct->parse( $self->{'_bit_stream'} );
     }
 
     my $entry_count = 0;
@@ -258,6 +260,16 @@ sub parse {
     return 1;
 }
 
+sub get_entry {
+    my ( $self, $entry_number ) = @_;
+
+    if (wantarray) {
+        return Archive::Zip::Parser::Entry::_get_entry($self);
+    }
+
+    return Archive::Zip::Parser::Entry::_get_entry( $self, $entry_number );
+}
+
 sub _set_position_in_file {
     my ( $self, $position_in_file, $whence ) = @_;
     my $file_handle = $self->{'_file_handle'};
@@ -310,6 +322,25 @@ Returns true if the file is a valid .ZIP archive. Else returns false.
 =item C<< parse() >>
 
 Parses file if it has not already been parsed. Dies if not a valid .ZIP archive.
+
+=item C<< get_entry() >>
+
+=over 4
+
+=item with argument (numeric)
+
+If a number is passed as argument to the method, it returns the particular
+L<entry|Archive::Zip::Parser::Entry> object.
+
+=item without argument
+
+In I<LIST> context, returns a list of L<entry|Archive::Zip::Parser::Entry>
+objects.
+
+In I<SCALAR> context, returns the number of list
+L<entries|Archive::Zip::Parser::Entry>.
+
+=back
 
 =back
 
