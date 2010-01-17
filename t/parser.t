@@ -21,4 +21,10 @@ for ( $parser->get_entry() ) {
 }
 is( $parser->get_entry(), 5, 'Got number of entries' );
 
+my $entry = $parser->get_entry(1);
+isa_ok(
+    my $local_file_header = $entry->get_local_file_header(),
+    'Archive::Zip::Parser::Entry::LocalFileHeader'
+);
+
 done_testing();
