@@ -68,7 +68,7 @@ sub parse {
         my $signature = pack 'N', $parsed_signature_struct->{'_signature'};
         last if $signature ne "PK\x03\x04";
 
-        my $entry_struct
+        my $local_file_header_struct
             = Struct(
                 '_entry_struct',
                 Struct(
@@ -134,7 +134,7 @@ sub parse {
             );
 
         push @parsed_entry_struct,
-          $entry_struct->parse( $self->{'_bit_stream'} );
+          $local_file_header_struct->parse( $self->{'_bit_stream'} );
     }
 
     my $entry_count = 0;
@@ -151,11 +151,11 @@ sub parse {
         my $signature = pack 'N', $parsed_signature_struct->{'_signature'};
         last if $signature ne "PK\x01\x02";
 
-        my $entry_struct
+        my $central_directory_record_struct
             = Struct(
                 '_entry_struct',
                 Struct(
-                    '_central_directory',
+                    '_central_directory_record',
                     ULInt32('_signature'                ),
                     ULInt16('_version_made_by'          ),
                     ULInt16('_version_needed_to_extract'),
@@ -214,7 +214,10 @@ sub parse {
 
         %{ $parsed_entry_struct[$entry_count] } = (
             %{ $parsed_entry_struct[$entry_count] },
-            %{ $entry_struct->parse( $self->{'_bit_stream'} ) }
+            %{  $central_directory_record_struct->parse(
+                    $self->{'_bit_stream'}
+                )
+              }
         );
         $entry_count++;
     }
