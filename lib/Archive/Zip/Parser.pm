@@ -301,7 +301,7 @@ This document describes Archive::Zip::Parser version 0.0.0_01
 
     my $parser = Archive::Zip::Parser->new( { file_name => 'secret_files.zip' } );
     $parser->parse();
- 
+
 
 =head1 DESCRIPTION
 
@@ -310,7 +310,7 @@ This parser is based on the specifications stated in APPNOTE.TXT
 published by PKWARE, Inc.
 
 
-=head1 INTERFACE 
+=head1 INTERFACE
 
 =over 4
 
