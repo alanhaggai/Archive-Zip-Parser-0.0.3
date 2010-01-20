@@ -289,7 +289,6 @@ __END__
 
 Archive::Zip::Parser - Parser for .ZIP archives
 
-
 =head1 VERSION
 
 This document describes Archive::Zip::Parser version 0.0.0_01
@@ -312,9 +311,37 @@ published by PKWARE, Inc.
 
 =head1 INTERFACE
 
+=head2 Method documentation format:
+
 =over 4
 
-=item C<< new( { 'file_name' => FILE_NAME } ) >>
+=item C<< method() >>
+
+Arguments: x
+
+=over 4
+
+=item * Argument type
+
+=over 4
+
+=item * CONTEXT
+
+=back
+
+=back
+
+=item C<< new() >>
+
+Arguments: 1
+
+=over 4
+
+=item * HASHREF
+
+I<file_name> - File name with path to .ZIP archive
+
+=back
 
 Returns reference to a parser object.
 
@@ -328,25 +355,42 @@ Parses file if it has not already been parsed. Dies if not a valid .ZIP archive.
 
 =item C<< get_entry() >>
 
+Arguments: 1
+
 =over 4
 
-=item with argument (numeric)
+=item * INT
 
-If a number is passed as argument to the method, it returns the particular
-L<entry|Archive::Zip::Parser::Entry> object.
+=over 4
 
-=item without argument
+=item * LIST
 
-In I<LIST> context, returns a list of L<entry|Archive::Zip::Parser::Entry>
+Ignores argument and returns a list of L<entry|Archive::Zip::Parser::Entry>
 objects.
 
-In I<SCALAR> context, returns the number of list
-L<entries|Archive::Zip::Parser::Entry>.
+=item * SCALAR
+
+Returns particular L<entry|Archive::Zip::Parser::Entry> object.
+
+=back
+
+=item * UNDEF
+
+=over 4
+
+=item * LIST
+
+Returns a list of L<entry|Archive::Zip::Parser::Entry> objects.
+
+=item * SCALAR
+
+Returns number of list L<entries|Archive::Zip::Parser::Entry>.
 
 =back
 
 =back
 
+=back
 
 =head1 DIAGNOSTICS
 
