@@ -156,9 +156,9 @@ sub parse {
                 '_entry_struct',
                 Struct(
                     '_central_directory',
-                    ULInt32('_signature'                ),
-                    ULInt16('_version_made_by'          ),
-                    ULInt16('_version_needed_to_extract'),
+                    ULInt32('_signature'      ),
+                    ULInt16('_version_made_by'),
+                    ULInt16('_version_needed' ),
                     BitStruct(
                         '_gp_bit',
                         Flag('_bit_7' ),
