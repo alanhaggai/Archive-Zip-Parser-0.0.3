@@ -298,7 +298,8 @@ This document describes Archive::Zip::Parser version 0.0.0_01
 
     use Archive::Zip::Parser;
 
-    my $parser = Archive::Zip::Parser->new( { file_name => 'secret_files.zip' } );
+    my $parser =
+      Archive::Zip::Parser->new( { file_name => 'secret_files.zip' } );
     $parser->parse();
 
 
