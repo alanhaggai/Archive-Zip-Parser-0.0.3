@@ -125,7 +125,7 @@ Provides methods to access central directory fields.
 
 =item C<< get_signature() >>
 
-Returns local file header signature in hexadecimal (04034b50).
+Returns local file header signature in hexadecimal (02014b50).
 
 =item C<< get_version_made_by() >>
 
