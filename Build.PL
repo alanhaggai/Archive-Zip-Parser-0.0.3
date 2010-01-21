@@ -16,6 +16,7 @@ my $builder = Module::Build->new(
         'Data::ParseBinary' => 0,
     },
     add_to_cleanup => ['Archive-Zip-Parser-*'],
+    repository     => 'git://github.com/alanhaggai/Archive-Zip-Parser.git',
 );
 
 $builder->create_build_script();
