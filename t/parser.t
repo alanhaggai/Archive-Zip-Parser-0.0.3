@@ -58,19 +58,19 @@ subtest 'local file header' => sub {
     );
 
     subtest 'last mod time' => sub {
-        my $last_mod_time = $local_file_header->get_last_mod_time();
-        is( $last_mod_time->{'hour'},   13, 'hour' );
-        is( $last_mod_time->{'minute'}, 32, 'minute' );
-        is( $last_mod_time->{'second'}, 7,  'second' );
+        my %last_mod_time = $local_file_header->get_last_mod_time();
+        is( $last_mod_time{'hour'},   13, 'hour' );
+        is( $last_mod_time{'minute'}, 32, 'minute' );
+        is( $last_mod_time{'second'}, 7,  'second' );
 
         done_testing();
     };
 
     subtest 'last mod date' => sub {
-        my $last_mod_date = $local_file_header->get_last_mod_date();
-        is( $last_mod_date->{'year'},  2010, 'year' );
-        is( $last_mod_date->{'month'}, 1,    'month' );
-        is( $last_mod_date->{'day'},   14,   'day' );
+        my %last_mod_date = $local_file_header->get_last_mod_date();
+        is( $last_mod_date{'year'},  2010, 'year' );
+        is( $last_mod_date{'month'}, 1,    'month' );
+        is( $last_mod_date{'day'},   14,   'day' );
 
         done_testing();
     };
@@ -142,19 +142,19 @@ subtest 'central directory' => sub {
     );
 
     subtest 'last mod time' => sub {
-        my $last_mod_time = $central_directory->get_last_mod_time();
-        is( $last_mod_time->{'hour'},   13, 'hour' );
-        is( $last_mod_time->{'minute'}, 32, 'minute' );
-        is( $last_mod_time->{'second'}, 7,  'second' );
+        my %last_mod_time = $central_directory->get_last_mod_time();
+        is( $last_mod_time{'hour'},   13, 'hour' );
+        is( $last_mod_time{'minute'}, 32, 'minute' );
+        is( $last_mod_time{'second'}, 7,  'second' );
 
         done_testing();
     };
 
     subtest 'last mod date' => sub {
-        my $last_mod_date = $central_directory->get_last_mod_date();
-        is( $last_mod_date->{'year'},  2010, 'year' );
-        is( $last_mod_date->{'month'}, 1,    'month' );
-        is( $last_mod_date->{'day'},   14,   'day' );
+        my %last_mod_date = $central_directory->get_last_mod_date();
+        is( $last_mod_date{'year'},  2010, 'year' );
+        is( $last_mod_date{'month'}, 1,    'month' );
+        is( $last_mod_date{'day'},   14,   'day' );
 
         done_testing();
     };

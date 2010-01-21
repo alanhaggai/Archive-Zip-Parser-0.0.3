@@ -201,7 +201,7 @@ sub get_last_mod_time {
     my $parsed_last_mod_time_struct
       = $last_mod_time_struct->parse($last_mod_time);
 
-    return $parsed_last_mod_time_struct;
+    return %{$parsed_last_mod_time_struct};
 }
 
 sub get_last_mod_date {
@@ -218,7 +218,7 @@ sub get_last_mod_date {
       = $last_mod_date_struct->parse($last_mod_date);
     $parsed_last_mod_date_struct->{'year'} += 1980;
 
-    return $parsed_last_mod_date_struct;
+    return %{$parsed_last_mod_date_struct};
 }
 
 sub get_crc_32 {
