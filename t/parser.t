@@ -29,7 +29,8 @@ subtest 'local file header' => sub {
     );
     is( $local_file_header->get_signature(), '04034b50', 'signature' );
     is( $local_file_header->get_version_needed(), 10, 'version needed' );
-    is( $local_file_header->get_version_needed( { describe => 1 } ),
+    is(
+        $local_file_header->get_version_needed( { describe => 1 } ),
         'Default value',
         'version needed description'
     );
@@ -48,7 +49,8 @@ subtest 'local file header' => sub {
     };
 
     is( $local_file_header->get_compression_method(), 0, 'compression method' );
-    is( $local_file_header->get_compression_method( { describe => 1 } ),
+    is(
+        $local_file_header->get_compression_method( { describe => 1 } ),
         'The file is stored (no compression)',
         'compression method description'
     );
@@ -85,7 +87,8 @@ subtest 'local file header' => sub {
         my %extra_fields = $local_file_header->get_extra_field();
         is( $extra_fields{'7875'}, '0104e803000004e8030000', 'extra field' );
         is( $extra_fields{'5455'}, '0386cf4e4b83cf4e4b',     'extra field' );
-        is( scalar $local_file_header->get_extra_field( { describe => 1 } ),
+        is(
+            scalar $local_file_header->get_extra_field( { describe => 1 } ),
             'extended timestamp',
             'serialised extra field descriptions'
         );
