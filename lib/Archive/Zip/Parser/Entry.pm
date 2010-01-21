@@ -50,44 +50,17 @@ Provides methods to Archive::Zip::Parser objects.
 
 =head1 INTERFACE
 
-=head2 Method documentation format:
-
 =over 4
-
-=item C<< method() >>
-
-Arguments: x
-
-=over 4
-
-=item * Argument type
-
-=over 4
-
-=item * CONTEXT
-
-=back
-
-=back
 
 =item C<< get_local_file_header() >>
-
-Arguments: 0
-
-=over 4
-
-=item * UNDEF
-
-=over 4
-
-=item * SCALAR
 
 Returns L<local file header|Archive::Zip::Parser::Entry::LocalFileHeader>
 object.
 
-=back
+=item C<< get_central_directory() >>
 
-=back
+Returns L<central directory|Archive::Zip::Parser::Entry::CentralDirectory>
+object.
 
 =back
 
@@ -101,9 +74,21 @@ Archive::Zip::Parser::Entry requires no configuration files or environment varia
 
 =over 4
 
-=item L<Archive::Zip::Parser::Entry::LocalFileHeader>
+=item L<autodie>
+
+First released with perl 5.010001
+
+=item L<Carp>
+
+First released with perl 5
+
+=item L<Data::ParseBinary>
 
 Not in CORE
+
+=item L<version>
+
+First released with perl 5.009
 
 =back
 
