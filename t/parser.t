@@ -28,7 +28,7 @@ subtest 'local file header' => sub {
         'Archive::Zip::Parser::Entry::LocalFileHeader'
     );
     is( $local_file_header->get_signature(), '04034b50', 'signature' );
-    is( $local_file_header->get_version_needed(), 10, 'version needed' );
+    is( $local_file_header->get_version_needed(), '1.0', 'version needed' );
     is(
         $local_file_header->get_version_needed( { describe => 1 } ),
         'Default value',
@@ -110,7 +110,7 @@ subtest 'central directory' => sub {
         'Archive::Zip::Parser::Entry::CentralDirectory'
     );
     is( $central_directory->get_signature(), '02014b50', 'signature' );
-    is( $central_directory->get_version_needed(), 10, 'version needed' );
+    is( $central_directory->get_version_needed(), '1.0', 'version needed' );
     is(
         $central_directory->get_version_needed( { describe => 1 } ),
         'Default value',

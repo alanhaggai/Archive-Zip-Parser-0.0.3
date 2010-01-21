@@ -12,35 +12,37 @@ sub get_signature {
 sub get_version_needed {
     my ( $self, $argref ) = @_;
 
-    my $version_needed = $self->{'_version_needed'};
+    my $version_needed =
+      int( $self->{'_version_needed'} / 10 ) . '.'
+      . $self->{'_version_needed'} % 10;
     if ( $argref->{'describe'} ) {
         my %version_description_mapping = (
-            '10' => 'Default value',
-            '11' => 'File is a volume label',
-            '20' => join( ', ',
+            '1.0' => 'Default value',
+            '1.1' => 'File is a volume label',
+            '2.0' => join( ', ',
                 'File is a folder (directory)',
                 'File is compressed using Deflate compression',
                 'File is encrypted using traditional PKWARE encryption',
             ),
-            '21' => 'File is compressed using Deflate64(tm)',
-            '25' => 'File is compressed using PKWARE DCL Implode ',
-            '27' => 'File is a patch data set ',
-            '45' => 'File uses ZIP64 format extensions',
-            '46' => 'File is compressed using BZIP2 compression*',
-            '50' => join( ', ',
+            '2.1' => 'File is compressed using Deflate64(tm)',
+            '2.5' => 'File is compressed using PKWARE DCL Implode ',
+            '2.7' => 'File is a patch data set ',
+            '4.5' => 'File uses ZIP64 format extensions',
+            '4.6' => 'File is compressed using BZIP2 compression*',
+            '5.0' => join( ', ',
                 'File is encrypted using DES',
                 'File is encrypted using 3DES',
                 'File is encrypted using original RC2 encryption',
                 'File is encrypted using RC4 encryption',
             ),
-            '51' => join( ', ',
+            '5.1' => join( ', ',
                 'File is encrypted using AES encryption',
                 'File is encrypted using corrected RC2 encryption',
             ),
-            '52' => 'File is encrypted using corrected RC2-64 encryption',
-            '61' => 'File is encrypted using non-OAEP key wrapping',
-            '62' => 'Central directory encryption',
-            '63' => join( ', ',
+            '5.2' => 'File is encrypted using corrected RC2-64 encryption',
+            '6.1' => 'File is encrypted using non-OAEP key wrapping',
+            '6.2' => 'Central directory encryption',
+            '6.3' => join( ', ',
                 'File is compressed using LZMA',
                 'File is compressed using PPMd',
                 'File is encrypted using Blowfish',
