@@ -84,16 +84,9 @@ subtest 'local file header' => sub {
     is( $local_file_header->get_file_name(), 'a/b/b.txt', 'file name' );
 
     subtest 'extra field' => sub {
-        is( scalar $local_file_header->get_extra_field(),
-            2, 'number of extra fields' );
         my %extra_fields = $local_file_header->get_extra_field();
         is( $extra_fields{'7875'}, '0104e803000004e8030000', 'extra field' );
         is( $extra_fields{'5455'}, '0386cf4e4b83cf4e4b',     'extra field' );
-        is(
-            scalar $local_file_header->get_extra_field( { describe => 1 } ),
-            'extended timestamp',
-            'serialised extra field descriptions'
-        );
         %extra_fields
           = $local_file_header->get_extra_field( { describe => 1 } );
         is( $extra_fields{'7875'}, '0104e803000004e8030000', 'extra field' );
@@ -168,16 +161,9 @@ subtest 'central directory' => sub {
     is( $central_directory->get_file_name(), 'a/b/b.txt', 'file name' );
 
     subtest 'extra field' => sub {
-        is( scalar $central_directory->get_extra_field(),
-            2, 'number of extra fields' );
         my %extra_fields = $central_directory->get_extra_field();
         is( $extra_fields{'7875'}, '0104e803000004e8030000', 'extra field' );
         is( $extra_fields{'5455'}, '0386cf4e4b',             'extra field' );
-        is(
-            scalar $central_directory->get_extra_field( { describe => 1 } ),
-            'extended timestamp',
-            'serialised extra field descriptions'
-        );
         %extra_fields
           = $central_directory->get_extra_field( { describe => 1 } );
         is( $extra_fields{'7875'}, '0104e803000004e8030000', 'extra field' );

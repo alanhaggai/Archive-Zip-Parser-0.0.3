@@ -342,26 +342,16 @@ sub get_extra_field {
             }
         }
 
-        if (wantarray) {
-            return %extra_field_descriptions;
-        }
-        else {
-            return join( ', ', @descriptions_to_be_serialised );
-        }
+        return %extra_field_descriptions;
     }
 
-    if (wantarray) {
-        my %extra_field;
-        for ( @{ $parsed_extra_field->{'_header'} } ) {
-            my $id   = unpack( 'H*', pack( 'n', $_->{'_id'} ) );
-            my $data = unpack( 'H*', $_->{'_data'} );
-            $extra_field{$id} = $data;
-        }
-        return %extra_field;
+    my %extra_field;
+    for ( @{ $parsed_extra_field->{'_header'} } ) {
+        my $id   = unpack( 'H*', pack( 'n', $_->{'_id'} ) );
+        my $data = unpack( 'H*', $_->{'_data'} );
+        $extra_field{$id} = $data;
     }
-    else {
-        return scalar @{ $parsed_extra_field->{'_header'} };
-    }
+    return %extra_field;
 }
 
 1;
