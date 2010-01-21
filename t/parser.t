@@ -128,7 +128,7 @@ subtest 'central directory' => sub {
         }
 
         my @gp_bit_descriptions
-          = $local_file_header->get_gp_bit( { describe => 1 } );
+          = $central_directory->get_gp_bit( { describe => 1 } );
         is( scalar @gp_bit_descriptions, 0, 'general purpose bit flag description' );
 
         done_testing();
