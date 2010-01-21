@@ -1,6 +1,11 @@
 Build.PL
 Changes
 lib/Archive/Zip/Parser.pm
+lib/Archive/Zip/Parser/CentralDirectoryEnd.pm
+lib/Archive/Zip/Parser/Entry.pm
+lib/Archive/Zip/Parser/Entry/CentralDirectory.pm
+lib/Archive/Zip/Parser/Entry/Header.pm
+lib/Archive/Zip/Parser/Entry/LocalFileHeader.pm
 lib/Archive/Zip/Parser/Exception.pm
 MANIFEST
 README
@@ -10,3 +15,4 @@ t/parser.t
 t/perlcritic.t
 t/pod-coverage.t
 t/pod.t
+META.yml
