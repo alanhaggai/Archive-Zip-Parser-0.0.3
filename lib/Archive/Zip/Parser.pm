@@ -234,9 +234,9 @@ sub parse {
     my $signature = pack 'N', $parsed_signature_struct->{'_signature'};
     last if $signature ne "PK\x05\x06";
 
-    my $end_of_central_directory_struct
+    my $central_directory_end_struct
         = Struct(
-            '_end_of_central_directory_struct',
+            '_central_directory_end',
             ULInt32('_signature'                ),
             ULInt16('_disk_number'),
             ULInt16('_start_disk_number'),
@@ -253,10 +253,10 @@ sub parse {
             ),
         );
 
-    my @parsed_end_of_central_directory_struct
-      = $end_of_central_directory_struct->parse( $self->{'_bit_stream'} );
-    push @{ $self->{'_end_of_central_directory'} },
-      @parsed_end_of_central_directory_struct;
+    my @parsed_central_directory_end_struct
+      = $central_directory_end_struct->parse( $self->{'_bit_stream'} );
+    push @{ $self->{'_central_directory_end'} },
+      @parsed_central_directory_end_struct;
     push @{ $self->{'_entry'} }, @parsed_entry_struct;
 
     $self->{'_is_parsed'} = 1;
