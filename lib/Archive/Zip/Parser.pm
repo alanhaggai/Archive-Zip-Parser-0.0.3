@@ -16,11 +16,9 @@ sub new {
     my ( $class, $arg_ref ) = @_;
 
     my $new_object = bless {}, $class;
-    my $exception_object = Archive::Zip::Parser::Exception->new();
-    $new_object->{'_exception_object'} = $exception_object;
 
     if ( !exists $arg_ref->{'file_name'} ) {
-        $exception_object->_croak('Missing "file_name"');
+        $new_object->_croak('Missing "file_name"');
     }
 
     open my $file_handle, '<', $arg_ref->{'file_name'};
@@ -53,7 +51,7 @@ sub parse {
 
     return 1 if $self->{'_is_parsed'};
     if ( !$self->verify_signature() ) {
-        $self->{'_exception_object'}->_croak('Not a valid .ZIP archive');
+        $self->_croak('Not a valid .ZIP archive');
     }
 
     my @parsed_entry_struct;
