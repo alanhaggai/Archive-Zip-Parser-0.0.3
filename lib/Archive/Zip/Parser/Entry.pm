@@ -4,6 +4,7 @@ use warnings;
 use strict;
 
 use Archive::Zip::Parser::Entry::LocalFileHeader;
+use Archive::Zip::Parser::Entry::CentralDirectory;
 
 sub _get_entry {
     my ( $self, $entry_number ) = @_;
@@ -24,6 +25,12 @@ sub get_local_file_header {
     my $self = shift;
     return bless $self->{'_local_file_header'},
       'Archive::Zip::Parser::Entry::LocalFileHeader';
+}
+
+sub get_central_directory {
+    my $self = shift;
+    return bless $self->{'_central_directory'},
+      'Archive::Zip::Parser::Entry::CentralDirectory';
 }
 
 1;
