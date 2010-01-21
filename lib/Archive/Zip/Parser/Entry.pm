@@ -3,8 +3,10 @@ package Archive::Zip::Parser::Entry;
 use warnings;
 use strict;
 
-use Archive::Zip::Parser::Entry::LocalFileHeader;
-use Archive::Zip::Parser::Entry::CentralDirectory;
+use base qw(
+    Archive::Zip::Parser::Entry::LocalFileHeader
+    Archive::Zip::Parser::Entry::CentralDirectory
+);
 
 sub _get_entry {
     my ( $self, $entry_number ) = @_;
