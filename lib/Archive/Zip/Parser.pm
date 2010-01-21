@@ -251,10 +251,9 @@ sub parse {
             ),
         );
 
-    my @parsed_central_directory_end_struct
+    my $parsed_central_directory_end_struct
       = $central_directory_end_struct->parse( $self->{'_bit_stream'} );
-    push @{ $self->{'_central_directory_end'} },
-      @parsed_central_directory_end_struct;
+    $self->{'_central_directory_end'} = $parsed_central_directory_end_struct;
     push @{ $self->{'_entry'} }, @parsed_entry_struct;
 
     $self->{'_is_parsed'} = 1;
