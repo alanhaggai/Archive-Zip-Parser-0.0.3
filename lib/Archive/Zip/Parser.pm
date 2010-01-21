@@ -157,7 +157,7 @@ sub parse {
                 Struct(
                     '_central_directory',
                     ULInt32('_signature'      ),
-                    ULInt16('_version_made_by'),
+                    Field( '_version_made_by', 2 ),
                     ULInt16('_version_needed' ),
                     BitStruct(
                         '_gp_bit',
