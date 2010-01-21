@@ -36,14 +36,16 @@ subtest 'local file header' => sub {
     );
 
     subtest 'gp bit' => sub {
-        isa_ok( $local_file_header->get_gp_bit(), 'ARRAY' );
-
         my $bit_count = 0;
         my @bits      = $local_file_header->get_gp_bit();
         is( scalar @bits, 16, '16 bit flags' );
         for (@bits) {
             is( $_, 0, 'bit ' . $bit_count++ );
         }
+
+        my @gp_bit_descriptions
+          = $local_file_header->get_gp_bit( { describe => 1 } );
+        is( scalar @gp_bit_descriptions, 0, 'general purpose bit flag description' );
 
         done_testing();
     };
@@ -118,14 +120,16 @@ subtest 'central directory' => sub {
     );
 
     subtest 'gp bit' => sub {
-        isa_ok( $central_directory->get_gp_bit(), 'ARRAY' );
-
         my $bit_count = 0;
         my @bits      = $central_directory->get_gp_bit();
         is( scalar @bits, 16, '16 bit flags' );
         for (@bits) {
             is( $_, 0, 'bit ' . $bit_count++ );
         }
+
+        my @gp_bit_descriptions
+          = $local_file_header->get_gp_bit( { describe => 1 } );
+        is( scalar @gp_bit_descriptions, 0, 'general purpose bit flag description' );
 
         done_testing();
     };

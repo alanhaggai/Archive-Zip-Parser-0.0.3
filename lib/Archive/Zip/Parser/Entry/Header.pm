@@ -147,20 +147,10 @@ sub get_gp_bit {
               'Selected data values in the Local Header are masked';
         }
 
-        if (wantarray) {
-            return @gp_bit_descriptions;
-        }
-        else {
-            return join( ', ', @gp_bit_descriptions );
-        }
+        return @gp_bit_descriptions;
     }
 
-    if (wantarray) {
-        return @bits;
-    }
-    else {
-        return \@bits;
-    }
+    return @bits;
 }
 
 sub get_compression_method {
