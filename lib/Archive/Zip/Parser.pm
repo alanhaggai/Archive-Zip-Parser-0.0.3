@@ -266,11 +266,17 @@ sub parse {
 sub get_entry {
     my ( $self, $entry_number ) = @_;
 
-    if (wantarray) {
-        return Archive::Zip::Parser::Entry::_get_entry($self);
+    if ( !defined $entry_number ) {
+        my @entry_objects;
+        for ( @{ $self->{'_entry'} } ) {
+            push @entry_objects, bless $_, 'Archive::Zip::Parser::Entry';
+        }
+
+        return @entry_objects;
     }
 
-    return Archive::Zip::Parser::Entry::_get_entry( $self, $entry_number );
+    return bless $self->{'_entry'}->[$entry_number],
+      'Archive::Zip::Parser::Entry';
 }
 
 sub _set_position_in_file {

@@ -8,21 +8,6 @@ use base qw(
     Archive::Zip::Parser::Entry::CentralDirectory
 );
 
-sub _get_entry {
-    my ( $self, $entry_number ) = @_;
-
-    if ( !defined $entry_number ) {
-        my @entry_objects;
-        for ( @{ $self->{'_entry'} } ) {
-            push @entry_objects, bless $_, __PACKAGE__;
-        }
-
-        return @entry_objects;
-    }
-
-    return bless $self->{'_entry'}->[$entry_number], __PACKAGE__;
-}
-
 sub get_local_file_header {
     my $self = shift;
     return bless $self->{'_local_file_header'},
