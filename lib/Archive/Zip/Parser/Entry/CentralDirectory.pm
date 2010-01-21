@@ -319,6 +319,12 @@ L<http://rt.cpan.org>.
 Alan Haggai Alavi  C<< <haggai@cpan.org> >>
 
 
+=head1 ACKNOWLEDGEMENTS
+
+Thanks to Shain Padmajan (L<http://shain.co.in/>) for helping me shorten method
+names.
+
+
 =head1 LICENCE AND COPYRIGHT
 
 Copyright (c) 2010, Alan Haggai Alavi C<< <haggai@cpan.org> >>. All rights reserved.
