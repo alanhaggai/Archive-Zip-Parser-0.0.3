@@ -45,7 +45,8 @@ subtest 'local file header' => sub {
 
         my @gp_bit_descriptions
           = $local_file_header->get_gp_bit( { describe => 1 } );
-        is( scalar @gp_bit_descriptions, 0, 'general purpose bit flag description' );
+        is( scalar @gp_bit_descriptions,
+            0, 'general purpose bit flag description' );
 
         done_testing();
     };
@@ -122,7 +123,8 @@ subtest 'central directory' => sub {
 
         my @gp_bit_descriptions
           = $central_directory->get_gp_bit( { describe => 1 } );
-        is( scalar @gp_bit_descriptions, 0, 'general purpose bit flag description' );
+        is( scalar @gp_bit_descriptions,
+            0, 'general purpose bit flag description' );
 
         done_testing();
     };
@@ -198,6 +200,24 @@ subtest 'central directory' => sub {
     is( $central_directory->get_rel_offset_local_header(),
         '0000007a', 'relative offset of local header' );
     is( $central_directory->get_file_comment(), '', 'file comment' );
+
+    done_testing();
+};
+
+subtest 'central directory end' => sub {
+    my $central_directory_end = $parser->get_central_directory_end();
+    is( $central_directory_end->get_signature(),   '06054b50', 'signature' );
+    is( $central_directory_end->get_disk_number(), 0,          'disk number' );
+    is( $central_directory_end->get_start_disk_number(),
+        0, 'start disk number' );
+    is( $central_directory_end->get_total_disk_entries(),
+        5, 'total disk entries' );
+    is( $central_directory_end->get_total_entries(), 5,   'total entries' );
+    is( $central_directory_end->get_size(),          378, 'size' );
+    is( $central_directory_end->get_start_offset(),  342, 'start offset' );
+    is( $central_directory_end->get_zip_comment_length(),
+        0, 'zip comment length' );
+    is( $central_directory_end->get_zip_comment(), '', 'zip comment' );
 
     done_testing();
 };

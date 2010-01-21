@@ -6,6 +6,7 @@ use autodie;
 use Data::ParseBinary;
 
 use Archive::Zip::Parser::Entry;
+use Archive::Zip::Parser::CentralDirectoryEnd;
 use base qw( Archive::Zip::Parser::Exception );
 
 use version; our $VERSION = qv( '0.0.0_01' );
@@ -235,13 +236,13 @@ sub parse {
     my $central_directory_end_struct
         = Struct(
             '_central_directory_end',
-            ULInt32('_signature'                ),
-            ULInt16('_disk_number'),
-            ULInt16('_start_disk_number'),
+            ULInt32('_signature'         ),
+            ULInt16('_disk_number'       ),
+            ULInt16('_start_disk_number' ),
             ULInt16('_total_disk_entries'),
-            ULInt16('_total_entries'),
-            ULInt32('_size'),
-            ULInt32('_start_offset'),
+            ULInt16('_total_entries'     ),
+            ULInt32('_size'              ),
+            ULInt32('_start_offset'      ),
             ULInt16('_zip_comment_length'),
             String(
                 '_zip_comment',
@@ -283,6 +284,12 @@ sub _set_position_in_file {
     seek $file_handle, $position_in_file, $whence;
 
     return;
+}
+
+sub get_central_directory_end {
+    my $self = shift;
+    return bless $self->{'_central_directory_end'},
+      'Archive::Zip::Parser::CentralDirectoryEnd';
 }
 
 1;
@@ -338,6 +345,11 @@ Returns a list of L<entry|Archive::Zip::Parser::Entry> objects.
 =item C<< get_entry(VALUE) >>
 
 Returns particular L<entry|Archive::Zip::Parser::Entry> object.
+
+=item C<< get_central_directory_end() >>
+
+Returns L<central directory end|Archive::Zip::Parser::CentralDirectoryEnd>
+object.
 
 =back
 
