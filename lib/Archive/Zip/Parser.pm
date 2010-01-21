@@ -318,39 +318,13 @@ published by PKWARE, Inc.
 
 =head1 INTERFACE
 
-=head2 Method documentation format:
-
 =over 4
 
-=item C<< method() >>
+=item C<< new( { file_name => VALUE } ) >>
 
-Arguments: x
+C<file_name> - File name with path to .ZIP archive
 
-=over 4
-
-=item * Argument type
-
-=over 4
-
-=item * CONTEXT
-
-=back
-
-=back
-
-=item C<< new() >>
-
-Arguments: 1
-
-=over 4
-
-=item * HASHREF
-
-I<file_name> - File name with path to .ZIP archive
-
-=back
-
-Returns reference to a parser object.
+Returns a parser object.
 
 =item C<< verify_signature() >>
 
@@ -362,40 +336,11 @@ Parses file if it has not already been parsed. Dies if not a valid .ZIP archive.
 
 =item C<< get_entry() >>
 
-Arguments: 1
-
-=over 4
-
-=item * INT
-
-=over 4
-
-=item * LIST
-
-Ignores argument and returns a list of L<entry|Archive::Zip::Parser::Entry>
-objects.
-
-=item * SCALAR
-
-Returns particular L<entry|Archive::Zip::Parser::Entry> object.
-
-=back
-
-=item * UNDEF
-
-=over 4
-
-=item * LIST
-
 Returns a list of L<entry|Archive::Zip::Parser::Entry> objects.
 
-=item * SCALAR
+=item C<< get_entry(VALUE) >>
 
-Returns number of list L<entries|Archive::Zip::Parser::Entry>.
-
-=back
-
-=back
+Returns particular L<entry|Archive::Zip::Parser::Entry> object.
 
 =back
 
