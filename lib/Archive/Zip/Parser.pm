@@ -5,10 +5,8 @@ use strict;
 use autodie;
 use Data::ParseBinary;
 
-use base qw(
-    Archive::Zip::Parser::Exception
-    Archive::Zip::Parser::Entry
-);
+use Archive::Zip::Parser::Entry;
+use base qw( Archive::Zip::Parser::Exception );
 
 use version; our $VERSION = qv( '0.0.0_01' );
 

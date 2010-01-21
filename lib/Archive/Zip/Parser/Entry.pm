@@ -3,10 +3,8 @@ package Archive::Zip::Parser::Entry;
 use warnings;
 use strict;
 
-use base qw(
-    Archive::Zip::Parser::Entry::LocalFileHeader
-    Archive::Zip::Parser::Entry::CentralDirectory
-);
+use Archive::Zip::Parser::Entry::LocalFileHeader;
+use Archive::Zip::Parser::Entry::CentralDirectory;
 
 sub get_local_file_header {
     my $self = shift;
