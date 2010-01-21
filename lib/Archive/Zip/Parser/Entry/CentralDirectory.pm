@@ -227,6 +227,18 @@ Returns file comment length in bytes.
 
 Returns disk number start.
 
+=item C<< get_internal_file_attr() >>
+
+Returns internal file attributes in hexadecimal.
+
+=item C<< get_external_file_attr() >>
+
+Returns external file attributes in hexadecimal.
+
+=item C<< get_rel_offset_local_header() >>
+
+Returns relative offset of local header in hexadecimal.
+
 =item C<< get_file_name() >>
 
 Returns file name.
