@@ -18,6 +18,11 @@ sub get_central_directory {
       'Archive::Zip::Parser::Entry::CentralDirectory';
 }
 
+sub get_file_data {
+    my $self = shift;
+    return $self->{'_file_data'};
+}
+
 1;
 __END__
 
@@ -59,6 +64,10 @@ object.
 
 Returns L<central directory|Archive::Zip::Parser::Entry::CentralDirectory>
 object.
+
+=item C<< get_file_data() >>
+
+Returns binary file data.
 
 =back
 
