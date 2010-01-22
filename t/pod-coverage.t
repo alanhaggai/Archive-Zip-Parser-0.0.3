@@ -9,10 +9,11 @@ if ($@) {
     );
 }
 
-plan( tests => 5 );
+plan( tests => 6 );
 
 pod_coverage_ok('Archive::Zip::Parser');
 pod_coverage_ok('Archive::Zip::Parser::CentralDirectoryEnd');
 pod_coverage_ok('Archive::Zip::Parser::Entry');
-pod_coverage_ok('Archive::Zip::Parser::Entry::LocalFileHeader');
 pod_coverage_ok('Archive::Zip::Parser::Entry::CentralDirectory');
+pod_coverage_ok('Archive::Zip::Parser::Entry::DataDescriptor');
+pod_coverage_ok('Archive::Zip::Parser::Entry::LocalFileHeader');
