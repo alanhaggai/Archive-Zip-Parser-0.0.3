@@ -123,7 +123,7 @@ Returns a hash of extra fields:
 
 =over 4
 
-=item * 'id' => 'data'
+=item * C<< 'id' => 'data' >>
 
 =back
 
@@ -134,7 +134,7 @@ descriptions wherever possible:
 
 =over 4
 
-=item * 'id description' => 'data'
+=item * C<< 'id description' => 'data' >>
 
 =back
 
