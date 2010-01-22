@@ -15,7 +15,7 @@ central directory fields.
 
 =head1 VERSION
 
-This document describes Archive::Zip::Parser::Entry::DataDescriptor version 0.0.0_02
+This document describes Archive::Zip::Parser::Entry::DataDescriptor version 0.0.0_03
 
 
 =head1 SYNOPSIS
