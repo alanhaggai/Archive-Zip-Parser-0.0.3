@@ -79,7 +79,7 @@ object.
 =item C<< get_data_descriptor() >>
 
 Returns L<data descriptor|Archive::Zip::Parser::Entry::DataDescriptor>
-object.
+object. If a data descriptor does not exist, returns false.
 
 =item C<< get_file_data() >>
 
