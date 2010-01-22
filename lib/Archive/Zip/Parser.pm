@@ -55,17 +55,7 @@ sub parse {
 
     my @parsed_entry_struct;
     while (1) {
-        my $signature_struct = 
-            Struct(
-                '_signature_struct',
-                Peek(
-                    UBInt32('_signature')
-                ),
-            );
-        my $parsed_signature_struct
-          = $signature_struct->parse( $self->{'_bit_stream'} );
-        my $signature = pack 'N', $parsed_signature_struct->{'_signature'};
-        last if $signature ne "PK\x03\x04";
+        last if $self->_check_signature('04034b50');
 
         my $local_file_header_struct
             = Struct(
@@ -138,17 +128,7 @@ sub parse {
 
     my $entry_count = 0;
     while (1) {
-        my $signature_struct = 
-            Struct(
-                '_signature_struct',
-                Peek(
-                    UBInt32('_signature')
-                ),
-            );
-        my $parsed_signature_struct
-          = $signature_struct->parse( $self->{'_bit_stream'} );
-        my $signature = pack 'N', $parsed_signature_struct->{'_signature'};
-        last if $signature ne "PK\x01\x02";
+        last if $self->_check_signature('02014b50');
 
         my $central_directory_struct
             = Struct(
@@ -221,17 +201,7 @@ sub parse {
         $entry_count++;
     }
 
-    my $signature_struct = 
-        Struct(
-            '_signature_struct',
-            Peek(
-                UBInt32('_signature')
-            ),
-        );
-    my $parsed_signature_struct
-      = $signature_struct->parse( $self->{'_bit_stream'} );
-    my $signature = pack 'N', $parsed_signature_struct->{'_signature'};
-    last if $signature ne "PK\x05\x06";
+    last if $self->_check_signature('06054b50');
 
     my $central_directory_end_struct
         = Struct(
@@ -290,6 +260,25 @@ sub get_central_directory_end {
     my $self = shift;
     return bless $self->{'_central_directory_end'},
       'Archive::Zip::Parser::CentralDirectoryEnd';
+}
+
+sub _check_signature {
+    my ( $self, $next_signature ) = @_;
+
+    my $signature_struct = 
+        Struct(
+            '_signature_struct',
+            Peek(
+                ULInt32('_signature')
+            ),
+        );
+    my $parsed_signature_struct
+      = $signature_struct->parse( $self->{'_bit_stream'} );
+    my $signature = unpack( 'H*', pack( 'N', $parsed_signature_struct->{'_signature'} ) );
+    if ( $signature ne $next_signature ) {
+        return 1;
+    }
+    return;
 }
 
 1;
