@@ -10,7 +10,8 @@ __END__
 
 =head1 NAME
 
-Archive::Zip::Parser::Entry::LocalFileHeader - Provides methods to access local file header fields.
+Archive::Zip::Parser::Entry::LocalFileHeader - Provides methods to access local
+file header fields.
 
 =head1 VERSION
 

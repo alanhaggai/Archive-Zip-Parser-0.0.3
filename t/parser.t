@@ -102,6 +102,13 @@ subtest 'local file header' => sub {
     done_testing();
 };
 
+my $data_descriptor = $entry->get_data_descriptor();
+if ($data_descriptor) {
+    isa_ok( $data_descriptor, 'Archive::Zip::Parser::Entry::DataDescriptor' );
+
+    done_testing();
+}
+
 subtest 'central directory' => sub {
     isa_ok(
         my $central_directory = $entry->get_central_directory(),

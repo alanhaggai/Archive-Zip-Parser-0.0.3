@@ -1,96 +1,62 @@
-package Archive::Zip::Parser::Entry;
+package Archive::Zip::Parser::Entry::DataDescriptor;
 
 use warnings;
 use strict;
 
-use Archive::Zip::Parser::Entry::LocalFileHeader;
-use Archive::Zip::Parser::Entry::CentralDirectory;
-use Archive::Zip::Parser::Entry::DataDescriptor;
-
-sub get_local_file_header {
-    my $self = shift;
-    return bless $self->{'_local_file_header'},
-      'Archive::Zip::Parser::Entry::LocalFileHeader';
-}
-
-sub get_central_directory {
-    my $self = shift;
-    return bless $self->{'_central_directory'},
-      'Archive::Zip::Parser::Entry::CentralDirectory';
-}
-
-sub get_data_descriptor {
-    my $self = shift;
-
-    if ( defined $self->{'_data_descriptor'} ) {
-        return bless $self->{'_data_descriptor'},
-          'Archive::Zip::Parser::Entry::DataDescriptor';
-    }
-    return;
-}
-
-sub get_file_data {
-    my $self = shift;
-    return $self->{'_file_data'};
-}
+use base qw( Archive::Zip::Parser::Entry::Header );
 
 1;
 __END__
 
 =head1 NAME
 
-Archive::Zip::Parser::Entry - Provides methods for getting local file header,
-central directory and file data of .ZIP archive files.
+Archive::Zip::Parser::Entry::DataDescriptor - Provides methods to access
+central directory fields.
 
 =head1 VERSION
 
-This document describes Archive::Zip::Parser::Entry version 0.0.0_02
+This document describes Archive::Zip::Parser::Entry::DataDescriptor version 0.0.0_02
 
 
 =head1 SYNOPSIS
 
     use Archive::Zip::Parser;
 
-    my $parser =
-      Archive::Zip::Parser->new( { file_name => 'secret_files.zip' } );
+    my $parser
+      = Archive::Zip::Parser->new( { file_name => 'secret_files.zip' } );
     $parser->parse();
-    my $entry             = $parser->get_entry(2);
-    my $local_file_header = $entry->get_local_file_header();
+    my $entry = $parser->get_entry(3);
+    my $data_descriptor = $entry->get_data_descriptor();
+    my $crc_32 = $data_descriptor->get_crc_32();
 
 
 =head1 DESCRIPTION
 
-Provides methods to Archive::Zip::Parser objects.
+Provides methods to access central directory fields.
 
 =head1 INTERFACE
 
 =over 4
 
-=item C<< get_local_file_header() >>
+=item C<< get_crc_32() >>
 
-Returns L<local file header|Archive::Zip::Parser::Entry::LocalFileHeader>
-object.
+Returns CRC-32 in hexadecimal.
 
-=item C<< get_central_directory() >>
+=item C<< get_compressed_size() >>
 
-Returns L<central directory|Archive::Zip::Parser::Entry::CentralDirectory>
-object.
+Returns compressed size in bytes.
 
-=item C<< get_data_descriptor() >>
+=item C<< get_uncompressed_size() >>
 
-Returns L<data descriptor|Archive::Zip::Parser::Entry::DataDescriptor>
-object.
-
-=item C<< get_file_data() >>
-
-Returns binary file data.
+Returns uncompressed size in bytes.
 
 =back
 
 
 =head1 CONFIGURATION AND ENVIRONMENT
 
-Archive::Zip::Parser::Entry requires no configuration files or environment variables.
+Archive::Zip::Parser::Entry::DataDescriptor requires no configuration files or
+environment variables.
 
 
 =head1 DEPENDENCIES
