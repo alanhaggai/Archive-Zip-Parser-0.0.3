@@ -28,7 +28,7 @@ central directory and file data of .ZIP archive files.
 
 =head1 VERSION
 
-This document describes Archive::Zip::Parser::Entry version 0.0.0_01
+This document describes Archive::Zip::Parser::Entry version 0.0.0_02
 
 
 =head1 SYNOPSIS

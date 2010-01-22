@@ -14,7 +14,7 @@ Archive::Zip::Parser::Entry::LocalFileHeader - Provides methods to access local 
 
 =head1 VERSION
 
-This document describes Archive::Zip::Parser::Entry::LocalFileHeader version 0.0.0_01
+This document describes Archive::Zip::Parser::Entry::LocalFileHeader version 0.0.0_02
 
 
 =head1 SYNOPSIS

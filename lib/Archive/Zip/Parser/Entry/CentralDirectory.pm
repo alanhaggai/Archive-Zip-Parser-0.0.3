@@ -100,7 +100,7 @@ central directory fields.
 
 =head1 VERSION
 
-This document describes Archive::Zip::Parser::Entry::CentralDirectory version 0.0.0_01
+This document describes Archive::Zip::Parser::Entry::CentralDirectory version 0.0.0_02
 
 
 =head1 SYNOPSIS

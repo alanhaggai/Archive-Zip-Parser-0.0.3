@@ -9,7 +9,7 @@ use Archive::Zip::Parser::Entry;
 use Archive::Zip::Parser::CentralDirectoryEnd;
 use base qw( Archive::Zip::Parser::Exception );
 
-use version; our $VERSION = qv( '0.0.0_01' );
+use version; our $VERSION = qv( '0.0.0_02' );
 
 sub new {
     my ( $class, $arg_ref ) = @_;
@@ -301,7 +301,7 @@ Archive::Zip::Parser - Parser for .ZIP archives
 
 =head1 VERSION
 
-This document describes Archive::Zip::Parser version 0.0.0_01
+This document describes Archive::Zip::Parser version 0.0.0_02
 
 
 =head1 SYNOPSIS
