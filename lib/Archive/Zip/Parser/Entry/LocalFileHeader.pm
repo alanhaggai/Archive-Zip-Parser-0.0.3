@@ -15,7 +15,7 @@ file header fields.
 
 =head1 VERSION
 
-This document describes Archive::Zip::Parser::Entry::LocalFileHeader version 0.0.0_03
+This document describes Archive::Zip::Parser::Entry::LocalFileHeader version 0.0.1
 
 
 =head1 SYNOPSIS
