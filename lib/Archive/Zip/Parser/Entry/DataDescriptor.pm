@@ -15,7 +15,7 @@ data descriptor fields.
 
 =head1 VERSION
 
-This document describes Archive::Zip::Parser::Entry::DataDescriptor version 0.0.1
+This document describes Archive::Zip::Parser::Entry::DataDescriptor version 0.0.2
 
 
 =head1 SYNOPSIS
