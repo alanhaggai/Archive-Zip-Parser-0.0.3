@@ -7,13 +7,21 @@ my $builder = Module::Build->new(
     license           => 'perl',
     dist_author       => 'Alan Haggai Alavi <haggai@cpan.org>',
     dist_version_from => 'lib/Archive/Zip/Parser.pm',
-    requires          => {
-        'Test::More'        => 0,
-        'Test::Exception'   => 0,
+    build_requires    => {
+        'Test::More'      => 0,
+        'Test::Exception' => 0,
+    },
+    requires => {
         'version'           => 0,
         'Carp'              => 0,
         'autodie'           => 0,
         'Data::ParseBinary' => 0,
+    },
+    'meta_merge' => {
+        'resources' => {
+            'repository' =>
+              'git://github.com/alanhaggai/Archive-Zip-Parser.git',
+        },
     },
     add_to_cleanup => ['Archive-Zip-Parser-*'],
     repository     => 'git://github.com/alanhaggai/Archive-Zip-Parser.git',
