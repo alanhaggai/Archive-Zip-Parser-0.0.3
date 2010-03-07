@@ -1,5 +1,8 @@
 Revision history for Archive-Zip-Parser
 
+0.0.3 Sunday, 07 March 2010
+      - Added build_requires and corrected repository meta
+
 0.0.2 Sunday, 24 January 2010
       - Removed Perl::Critic test
 

@@ -1,10 +1,10 @@
-Archive-Zip-Parser version 0.0.2
+Archive-Zip-Parser version 0.0.3
 
 NAME
     Archive::Zip::Parser - Parser for .ZIP archives
 
 VERSION
-    This document describes Archive::Zip::Parser version 0.0.2
+    This document describes Archive::Zip::Parser version 0.0.3
 
 INSTALLATION
 
